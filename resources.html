@@ -556,6 +556,7 @@ function toggleDark() {
   applyDark(saved !== null ? saved === '1' : prefersDark);
 })();
 window.addEventListener('storage', e => { if (e.key === 'dm') applyDark(e.newValue === '1'); });
+window.addEventListener('pageshow', e => { if (e.persisted) { const s = localStorage.getItem('dm'); applyDark(s === '1'); } });
 </script>
 </body>
 </html>
