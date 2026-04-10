@@ -1,3 +1,4 @@
-# Ignore large textbook PDF (exceeds GitHub's 100 MB limit)
+# Ignore large textbook files (exceed GitHub's 100 MB limit)
 Homework/MATH2107_TEXTBOOK.pdf
 Homework/LINEAR ALGEBRA AND ITS APPLICATIONS*.pdf
+Homework/MATH2107_TEXTBOOK.zip
