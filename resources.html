@@ -555,6 +555,7 @@ function toggleDark() {
   const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
   applyDark(saved !== null ? saved === '1' : prefersDark);
 })();
+window.addEventListener('storage', e => { if (e.key === 'dm') applyDark(e.newValue === '1'); });
 </script>
 </body>
 </html>
