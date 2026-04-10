@@ -141,6 +141,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue"
   .main{padding:0 20px 80px}
   .file-grid{grid-template-columns:1fr}
 }
+
+/* ── Dark mode ── */
+html.dark{
+  --bg:#0f0f12;--white:#1a1a20;--surface:#26262e;--border:#35353f;--border-light:#2e2e38;
+  --text:#f2f2f7;--text2:#d1d1d6;--text3:#8e8e93;--text4:#48484a;
+  --blue:#4da3ff;--blue-bg:#0d1f38;--blue-mid:#0a1a2e;
+  --green:#34c77b;--green-bg:#0d2318;
+  --red:#ff6b6b;--red-bg:#2a1010;
+  --amber:#fbbf24;--amber-bg:#2a1f06;
+  --purple:#a78bfa;--purple-bg:#1a1030;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.25),0 1px 2px rgba(0,0,0,.18);
+  --shadow-blue:0 4px 14px rgba(77,163,255,.2);
+  --shadow-amber:0 4px 14px rgba(251,191,36,.18);
+}
+html.dark .textbook-card{background:linear-gradient(135deg,#2a1f06 0%,#1f1500 100%)}
+html.dark body,html.dark .sidebar{transition:background .25s,color .25s}
+
+/* ── Dark toggle ── */
+.dark-toggle{display:flex;align-items:center;gap:7px;width:100%;margin-top:10px;
+  padding:6px 9px;border-radius:var(--rs);border:1px solid var(--border);
+  background:none;cursor:pointer;font-size:12px;font-weight:500;color:var(--text3);
+  transition:background .14s,color .14s,border-color .14s}
+.dark-toggle:hover{background:var(--surface);color:var(--text)}
+.dark-toggle-track{margin-left:auto;width:28px;height:16px;border-radius:8px;
+  background:var(--border);position:relative;transition:background .2s;flex-shrink:0}
+.dark-toggle-track::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;
+  border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+html.dark .dark-toggle-track{background:var(--blue)}
+html.dark .dark-toggle-track::after{transform:translateX(12px)}
+/* active sidebar link accent */
+.sb-link{position:relative}
+.sb-link.active::before{content:'';position:absolute;left:-9px;top:50%;transform:translateY(-50%);
+  width:3px;height:14px;border-radius:2px;background:var(--blue)}
 </style>
 </head>
 <body>
@@ -151,6 +184,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue"
     <div class="sb-logo">
       <div class="sb-logo-title">MATH 2107</div>
       <div class="sb-logo-sub">Paul Mezo · Carleton · W2026</div>
+      <button class="dark-toggle" onclick="toggleDark()" aria-label="Toggle dark mode">
+        <span id="dark-icon">🌙</span>
+        <span id="dark-label">Dark mode</span>
+        <span class="dark-toggle-track"></span>
+      </button>
     </div>
     <div class="sb-section">
       <div class="sb-section-label">Navigation</div>
@@ -500,6 +538,23 @@ document.querySelectorAll('.file-card').forEach(card => {
     this.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100) + '%');
   });
 });
+
+// ── Dark mode (synced with index.html via localStorage) ──
+function applyDark(on) {
+  document.documentElement.classList.toggle('dark', on);
+  document.getElementById('dark-icon').textContent = on ? '☀️' : '🌙';
+  document.getElementById('dark-label').textContent = on ? 'Light mode' : 'Dark mode';
+}
+function toggleDark() {
+  const on = !document.documentElement.classList.contains('dark');
+  applyDark(on);
+  localStorage.setItem('dm', on ? '1' : '0');
+}
+(function() {
+  const saved = localStorage.getItem('dm');
+  const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+  applyDark(saved !== null ? saved === '1' : prefersDark);
+})();
 </script>
 </body>
 </html>
