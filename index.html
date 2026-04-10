@@ -8,6 +8,7 @@
 <meta property="og:title" content="MATH 2107 — Mega Study Guide + Mock Final">
 <meta property="og:description" content="Full course study guide (§4–§7) with every definition, theorem, proof recipe, worked example, practice questions, and a complete mock final.">
 <meta property="og:type" content="website">
+<script>try{if(localStorage.getItem('dm')==='1'||localStorage.getItem('dm')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.classList.add('dark')}catch(e){}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -1841,7 +1842,7 @@ function applyDark(on){
 function toggleDark(){const on=!document.documentElement.classList.contains('dark');applyDark(on);localStorage.setItem('dm',on?'1':'0');}
 (function(){const saved=localStorage.getItem('dm');const prefersDark=window.matchMedia('(prefers-color-scheme:dark)').matches;applyDark(saved!==null?saved==='1':prefersDark);})();
 window.addEventListener('storage',e=>{if(e.key==='dm')applyDark(e.newValue==='1');});
-window.addEventListener('pageshow',e=>{if(e.persisted){const s=localStorage.getItem('dm');applyDark(s==='1');}});
+window.addEventListener('pageshow',()=>{const s=localStorage.getItem('dm');const prefersDark=window.matchMedia('(prefers-color-scheme:dark)').matches;applyDark(s!==null?s==='1':prefersDark);});
 </script>
 </body>
 </html>

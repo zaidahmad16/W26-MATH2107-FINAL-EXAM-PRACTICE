@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MATH 2107 — Course Resources</title>
 <meta name="description" content="Past homework, lecture notes, and quiz/midterm solutions for MATH 2107 — Paul Mezo · Carleton University · Winter 2026.">
+<script>try{if(localStorage.getItem('dm')==='1'||localStorage.getItem('dm')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.classList.add('dark')}catch(e){}</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -557,7 +558,7 @@ function toggleDark() {
   applyDark(saved !== null ? saved === '1' : prefersDark);
 })();
 window.addEventListener('storage', e => { if (e.key === 'dm') applyDark(e.newValue === '1'); });
-window.addEventListener('pageshow', e => { if (e.persisted) { const s = localStorage.getItem('dm'); applyDark(s === '1'); } });
+window.addEventListener('pageshow', () => { const s = localStorage.getItem('dm'); const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches; applyDark(s !== null ? s === '1' : prefersDark); });
 </script>
 </body>
 </html>
